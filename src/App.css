@@ -1,20 +1,37 @@
+.header {
+  background: red;
+}
 #footer {
-  background: yellow;
+  background-color: rgb(49, 48, 53);
+  color: rgb(255, 255, 255);
+  font-size: 16px;
 }
-header {
-  background: #000;
-  color: #fff;
-  padding: 10px;
+
+.footer-one {
+  padding: 15px;
 }
-ul {
-  display: flex;
-  justify-content: space-evenly;
+
+.footer-two {
+  background-color: rgb(64, 64, 67);
 }
-footer {
-  background: #000;
-  color: #fff;
-  padding: 10px;
+
+.footer-three {
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  height: 125px;
 }
-.active {
-  color: red;
+
+.footer-three img {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-three:after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  background: rgb(93, 93, 95);
+  width: 100%;
 }

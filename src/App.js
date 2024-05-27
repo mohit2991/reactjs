@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Counter from "./components/Counter";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import NotFound from "./components/NotFound";
-import Form from "./components/Form";
-import ClassVsFunction from "./components/ClassVsFunction";
-import Todo from "./components/Todo";
+import NotFound from "./screens/NotFound";
+import Home from "./screens/Home";
+import Movies from "./screens/Movies";
 
 class App extends Component {
   render() {
@@ -20,12 +16,7 @@ class App extends Component {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/form" element={<Form />} />
-            <Route path="/counter" element={<Counter />} />
-            <Route path="/class-function" element={<ClassVsFunction />} />
-            <Route path="/Todo" element={<Todo />} />
+            <Route path="/movies" element={<Movies />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
