@@ -27,11 +27,6 @@ const InnerHeader = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/ToDo"} className="nav-link">
-                TODo
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link to={"/stream"} className="nav-link">
                 Stream
               </Link>

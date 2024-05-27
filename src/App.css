@@ -35,3 +35,11 @@
   background: rgb(93, 93, 95);
   width: 100%;
 }
+
+.white-text {
+  color: #000;
+}
+
+.black-text {
+  color: #fff;
+}

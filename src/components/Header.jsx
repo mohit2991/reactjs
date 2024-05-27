@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InnerHeader from "./InnerHeader";
+import ThemeToggleButton from "./ThemeToggleButton";
 const logo = "/images/logo.png";
 
 function Header() {
@@ -21,6 +22,7 @@ function Header() {
               />
             </form>
           </div>
+          <ThemeToggleButton />
           <div className="d-flex justify-content-start align-items-center">
             <button type="button" className="btn btn-danger btn-sm me-2">
               Sign in
