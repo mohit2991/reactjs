@@ -7,9 +7,10 @@ import NotFound from "../screens/NotFound";
 import Home from "../screens/Home";
 import Movies from "../screens/Movies";
 import Stream from "../screens/Stream";
+import GithubUsers from "../screens/GithubUsers";
 
 const Layout = () => {
-  const { theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Router>
@@ -20,6 +21,7 @@ const Layout = () => {
           <Route path="/movies" element={<Movies />} />
           <Route path="/stream" element={<Stream />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/github-users" element={<GithubUsers />} />
         </Routes>
         <Footer />
       </div>

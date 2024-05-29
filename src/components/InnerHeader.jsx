@@ -52,6 +52,11 @@ const InnerHeader = () => {
                 Activites
               </a>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="github-users">
+                GitHub Users
+              </Link>
+            </li>
           </ul>
 
           <ul className="navbar-nav mb-2 mb-lg-0">
