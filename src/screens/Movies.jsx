@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MoviesList from "../components/MoviesList";
+import { getMovies } from "../Api";
+import axios from "axios";
 
 const Movies = () => {
   // APi call
-  const [movies] = useState([
-    { title: "Movie 1", subTitle: "Movie Sub 1" },
-    { title: "Movie 2", subTitle: "Movie Sub 2" },
-    { title: "Movie 3", subTitle: "Movie Sub 3" },
-    { title: "Movie 4", subTitle: "Movie Sub 4" },
-    { title: "Movie 5", subTitle: "Movie Sub 5" },
-  ]);
+  const [movies, setMovies] = useState([]);
+
+  const moviesList = async () => {
+    try {
+      const response = await axios.get(getMovies);
+
+      setMovies(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    moviesList();
+  }, []);
 
   return (
     <div class="container">

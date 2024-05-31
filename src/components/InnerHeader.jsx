@@ -53,8 +53,8 @@ const InnerHeader = () => {
               </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="github-users">
-                GitHub Users
+              <Link className="nav-link" to="blogs">
+                Blogs
               </Link>
             </li>
           </ul>

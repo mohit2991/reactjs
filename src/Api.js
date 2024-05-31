@@ -1,8 +1,11 @@
-const baseUrl = "https://api.github.com";
+const baseUrl = "http://localhost:8000/";
 
 // Api endpoint to get user list
-const userListAPI = `${baseUrl}/users`; // baseUrl + "/users"
-// Api endpoint to get user list
-const userListWithPaginationAPI = `${baseUrl}/users?since=11&per_page=10`;
+const getBlogsAPI = `${baseUrl}blogs`;
 
-export { userListAPI, userListWithPaginationAPI };
+const addPostAPI = `${baseUrl}blogs`;
+const getMovies = `${baseUrl}movies`;
+
+// movies
+
+export { getBlogsAPI, addPostAPI, getMovies };

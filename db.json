@@ -1,0 +1,38 @@
+{
+  "blogs": [
+    {
+      "id": "6991",
+      "title": "Title q",
+      "description": "Desciption 1"
+    },
+    {
+      "id": "0bea",
+      "title": "Ttilw ",
+      "description": "Desc 2"
+    },
+    {
+      "id": "7dd3",
+      "title": "New Blog",
+      "description": "This is only for testing..."
+    }
+  ],
+  "todo": [
+    {
+      "id": "f62e",
+      "title": "Task 1",
+      "description": "Task 1 Desc"
+    }
+  ],
+  "movies": [
+    {
+      "img": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00397579-hfnmhnhwae-portrait.jpg",
+      "title": "Endeavour Series 4",
+      "language": "English"
+    },
+    {
+      "img": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00392593-ceympcpbag-portrait.jpg",
+      "title": "The Boys",
+      "language": "Tamil"
+    }
+  ]
+}
