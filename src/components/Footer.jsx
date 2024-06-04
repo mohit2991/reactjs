@@ -1,8 +1,8 @@
 import React from "react";
-const LogoFooter = "/images/logofooter.png"
+import { Link } from "react-router-dom";
+const LogoFooter = "/images/logofooter.png";
 
 function Footer() {
-
   return (
     <footer id="footer" className="mt-4">
       <div className="container-fluid">
@@ -13,9 +13,11 @@ function Footer() {
               & get listed on BookMyShow
             </div>
             <div className="">
-              <button type="button" className="btn btn-danger btn-sm">
-                Contact Us
-              </button>
+              <Link to="/contact">
+                <button type="button" className="btn btn-danger btn-sm">
+                  Contact Us
+                </button>
+              </Link>
             </div>
           </div>
         </div>

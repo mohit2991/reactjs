@@ -10,6 +10,7 @@ import Stream from "../screens/Stream";
 import GithubUsers from "../screens/GithubUsers";
 import Blogs from "../screens/blogs/Blogs";
 import AddBlog from "../screens/blogs/AddBlog";
+import Contact from "../screens/Contact";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -25,6 +26,7 @@ const Navigations = () => {
           <Route path="/github-users" element={<GithubUsers />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/add" element={<AddBlog />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

@@ -8,4 +8,7 @@ const getMovies = `${baseUrl}movies`;
 
 // movies
 
-export { getBlogsAPI, addPostAPI, getMovies };
+// contact
+const getContactAPI = `${baseUrl}contacts`;
+
+export { getBlogsAPI, addPostAPI, getMovies, getContactAPI };

@@ -34,5 +34,19 @@
       "title": "The Boys",
       "language": "Tamil"
     }
+  ],
+  "contacts": [
+    {
+      "id": "70c0",
+      "name": "Mohit Chauhan",
+      "email": "mohit2991kumar@gmail.com",
+      "message": "Testing..."
+    },
+    {
+      "id": "277e",
+      "name": "Mohit Chauhan",
+      "email": "mohit2991kumar@gmail.com",
+      "message": "Test"
+    }
   ]
 }
