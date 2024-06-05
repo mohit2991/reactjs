@@ -11,6 +11,7 @@ import GithubUsers from "../screens/GithubUsers";
 import Blogs from "../screens/blogs/Blogs";
 import AddBlog from "../screens/blogs/AddBlog";
 import Contact from "../screens/Contact";
+import AddMovies from "../screens/backoffice/AddMovies";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -28,6 +29,8 @@ const Navigations = () => {
           <Route path="/blogs/add" element={<AddBlog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
+          {/* backoffice navigations */}
+          <Route path="backoffice/movies/add" element={<AddMovies />} />
         </Routes>
         <Footer />
       </div>

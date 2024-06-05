@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { addPostAPI } from "../../Api";
 
 const AddBlog = () => {
+  const navigate = useNavigate();
   //   const [formData, setFormData] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -33,10 +35,15 @@ const AddBlog = () => {
       const payload = {
         title,
         description,
+        date: new Date(),
       };
 
       // Api call to add new blog
       const response = await axios.post(addPostAPI, payload);
+
+      if (response) {
+        navigate("/blogs");
+      }
 
       console.log(">>> add blog response", response);
     } catch (error) {

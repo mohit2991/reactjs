@@ -11,7 +11,8 @@ const Blogs = () => {
   async function fetchBlog() {
     try {
       const response = await axios.get(getBlogsAPI);
-      setData(response.data);
+      const sortedData = response.data.sort((a, b) => b.id - a.id);
+      setData(sortedData);
     } catch (error) {
       console.log(">>>> error while fetching data", error);
     } finally {
@@ -53,7 +54,7 @@ const Blogs = () => {
                   <td>{obj.id}</td>
                   <td>{obj.title}</td>
                   <td>{obj.description}</td>
-                  <td>Date Time</td>
+                  <td>{obj.date ? obj.date : "-"}</td>
                   <td>
                     <button>Edit</button>
                     <button className="ms-1">Delete</button>
