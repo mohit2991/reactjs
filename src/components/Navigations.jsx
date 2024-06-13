@@ -12,6 +12,8 @@ import Blogs from "../screens/blogs/Blogs";
 import AddBlog from "../screens/blogs/AddBlog";
 import Contact from "../screens/Contact";
 import AddMovies from "../screens/backoffice/AddMovies";
+import Callbackhook from "../screens/backoffice/Callbackhook";
+import Memohook from "../screens/backoffice/Memohook.jsx";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -30,7 +32,15 @@ const Navigations = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
           {/* backoffice navigations */}
-          <Route path="backoffice/movies/add" element={<AddMovies />} />
+          <Route path="/backoffice/movies/add" element={<AddMovies />} />
+          <Route
+            path="/backoffice/callbackhook"
+            element={<Callbackhook />}
+          />
+          <Route
+            path="/backoffice/memohook"
+            element={<Memohook />}
+          />
         </Routes>
         <Footer />
       </div>
