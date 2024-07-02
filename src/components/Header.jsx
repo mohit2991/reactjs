@@ -24,9 +24,11 @@ function Header() {
           </div>
           <ThemeToggleButton />
           <div className="d-flex justify-content-start align-items-center">
-            <button type="button" className="btn btn-danger btn-sm me-2">
-              Sign in
-            </button>
+            <Link to={"login"}>
+              <button type="button" className="btn btn-danger btn-sm me-2">
+                Sign in
+              </button>
+            </Link>
 
             <button
               className="navbar-toggler"

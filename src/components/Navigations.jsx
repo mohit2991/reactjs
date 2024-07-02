@@ -14,6 +14,8 @@ import Contact from "../screens/Contact";
 import AddMovies from "../screens/backoffice/AddMovies";
 import Callbackhook from "../screens/backoffice/Callbackhook";
 import Memohook from "../screens/backoffice/Memohook.jsx";
+import Login from "../screens/auth/Login.jsx";
+import SignUp from "../screens/auth/SignUp.jsx";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -23,6 +25,8 @@ const Navigations = () => {
       <div style={{ background: theme === "light" ? "white" : "black" }}>
         <Header />
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/stream" element={<Stream />} />
@@ -33,14 +37,8 @@ const Navigations = () => {
           <Route path="*" element={<NotFound />} />
           {/* backoffice navigations */}
           <Route path="/backoffice/movies/add" element={<AddMovies />} />
-          <Route
-            path="/backoffice/callbackhook"
-            element={<Callbackhook />}
-          />
-          <Route
-            path="/backoffice/memohook"
-            element={<Memohook />}
-          />
+          <Route path="/backoffice/callbackhook" element={<Callbackhook />} />
+          <Route path="/backoffice/memohook" element={<Memohook />} />
         </Routes>
         <Footer />
       </div>
