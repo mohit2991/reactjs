@@ -55,8 +55,6 @@ const SignUp = () => {
       password,
     };
 
-    // console.log(">>>>>> payload", payload);
-
     try {
       const response = axios.post(
         "http://localhost:8000/api/register",
@@ -65,32 +63,21 @@ const SignUp = () => {
 
       response
         .then((result) => {
-          const { status, message } = result.data;
-          //   showToast(message, "success");
-          //   alert(message);
+          const { message } = result.data;
           setSuccessMessage(message);
+          clearForm();
         })
         .catch((error) => {
-          //   showToast("Some Error Occured!", "error");
-          console.log(">>>>>>>> mohit error", error.response.data.message);
           setEmailError(error.response.data.message);
         });
     } catch (error) {
       showToast("Some Error Occured!", "error");
       console.log(error);
     }
-    //   const query = new URLSearchParams(formData).toString();
-    //   try {
-    //     const response = await axios.post(
-    //       `http://localhost:8000/api/register?${query}`
-    //     );
-    //     if (response) {
-    //       showToast("User Registered Successfully!", "success");
-    //     }
-    //   } catch (error) {
-    //     showToast("Some Error Occured!", "error");
-    //     console.log(error);
-    //   }
+  };
+
+  const clearForm = () => {
+    setName("");
   };
 
   return (
@@ -113,6 +100,7 @@ const SignUp = () => {
                       name="name"
                       placeholder="Enter your full name"
                       onChange={handleChange}
+                      value={name}
                     />
                   </div>
                   <div className="mb-3">
