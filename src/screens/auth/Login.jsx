@@ -1,6 +1,8 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
+import { showToast } from "../../utils/toast";
+import useApi from "../../api/useApi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,23 +32,27 @@ const Login = () => {
   );
 
   const login = () => {
+    setLoading(true); // set loader
     const payload = { email, password };
 
-    const promise = axios.post("http://localhost:8000/api/login", payload);
+    const promise = useApi.login(payload); // Call login api
     promise
       .then(async function (respose) {
-        console.log("Respose >>>>>>>>>>>>....", respose);
+        setLoading(false); // unset loader
         await localStorage.setItem("email", email);
         await localStorage.setItem("token", respose.data.token);
+        await sessionStorage.setItem("email", email);
         clearFrom();
-        navigate("/");
+        showToast("Login Successfully!", "success");
+        navigate("/movies");
       })
       .catch((error) => {
+        setLoading(false);
         if (error.response.status === 401) {
-          console.log("Error while login", error.response.data.message);
-          setError(error.response.data.message);
+          showToast(error.response.data.message, "error");
         } else {
           console.log("Error while login", error.message);
+          showToast(error.message, "error");
         }
       });
   };
@@ -106,8 +113,18 @@ const Login = () => {
                       type="button"
                       className="btn btn-primary w-100"
                       onClick={login}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
                     >
-                      Login
+                      Login&nbsp;
+                      {loading && (
+                        <div className="loader">
+                          <ThreeDots height="30" width="30" color="#fff" />
+                        </div>
+                      )}
                     </button>
                   </form>
                 </div>

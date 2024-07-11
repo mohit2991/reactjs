@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InnerHeader from "./InnerHeader";
 import ThemeToggleButton from "./ThemeToggleButton";
+import useApi from "../api/useApi";
 const logo = "/images/logo.png";
 
 function Header() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("email");
   // const [userEmail] = useState(localStorage.getItem("email"));
+
+  function getProfile() {
+    const promise = useApi.userProfile();
+    promise
+      .then(async function (respose) {
+        console.log(">>>>>>> profile respose", respose);
+      })
+      .catch((error) => {
+        console.log(">>>>>>> profile error", error.message);
+        // setLoading(false);
+        // if (error.response.status === 401) {
+        //   showToast(error.response.data.message, "error");
+        // } else {
+        //   console.log("Error while login", error.message);
+        //   showToast(error.message, "error");
+        // }
+      });
+  }
+
+  // it's render once after jsx render (ComponentDidMount)
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const logout = async () => {
     await localStorage.clear();
