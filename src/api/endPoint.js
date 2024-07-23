@@ -1,6 +1,6 @@
 const endpoint = {
   login: "api/login",
-  signup: "api/signup",
+  signup: "api/register",
   profile: "/api/profile",
 };
 

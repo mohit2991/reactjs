@@ -3,14 +3,10 @@ import endpoint from "./endPoint";
 
 const useApi = {
   login: async (payload) => {
-    const respose = await api.post(endpoint.login, payload);
-    return respose;
-    // return respose.data;
+    return await api.post(endpoint.login, payload);
   },
   signup: async (payload) => {
-    const respose = await api.post(endpoint.signup, payload);
-    return respose;
-    // return respose.data;
+    return await api.post(endpoint.signup, payload);
   },
   userProfile: async () => {
     const respose = await api.get(endpoint.profile);

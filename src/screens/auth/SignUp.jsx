@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { showToast } from "../../utils/toast";
+import useApi from "../../api/useApi";
+import errorHandler from "../../utils/errorHandle";
 
 const SignUp = () => {
   //   const [formData, setFormData] = useState({
@@ -56,28 +57,23 @@ const SignUp = () => {
     };
 
     try {
-      const response = axios.post(
-        "http://localhost:8000/api/register",
-        payload
-      );
-
-      response
-        .then((result) => {
-          const { message } = result.data;
-          setSuccessMessage(message);
-          clearForm();
-        })
-        .catch((error) => {
-          setEmailError(error.response.data.message);
-        });
+      const response = await useApi.signup(payload);
+      if (response) {
+        showToast("Your account has been Register Successfully!", "success");
+        clearForm();
+      }
+      // 200-299
     } catch (error) {
-      showToast("Some Error Occured!", "error");
-      console.log(error);
+      // call error handler
+      errorHandler(error);
     }
   };
 
   const clearForm = () => {
     setName("");
+    setEmail("");
+    setPhone(null);
+    setPassword("");
   };
 
   return (

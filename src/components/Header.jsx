@@ -30,7 +30,7 @@ function Header() {
 
   // it's render once after jsx render (ComponentDidMount)
   useEffect(() => {
-    getProfile();
+    // getProfile();
   }, []);
 
   const logout = async () => {

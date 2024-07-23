@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { showToast } from "../../utils/toast";
 import useApi from "../../api/useApi";
+import errorHandler from "../../utils/errorHandle";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,30 +32,26 @@ const Login = () => {
     [email, password]
   );
 
-  const login = () => {
+  const login = async () => {
     setLoading(true); // set loader
     const payload = { email, password };
 
-    const promise = useApi.login(payload); // Call login api
-    promise
-      .then(async function (respose) {
-        setLoading(false); // unset loader
-        await localStorage.setItem("email", email);
-        await localStorage.setItem("token", respose.data.token);
-        await sessionStorage.setItem("email", email);
+    try {
+      const response = await useApi.login(payload); // Call login api
+      if (response) {
+        // await localStorage.setItem("email", email);
+        // await localStorage.setItem("token", response.data.token);
+        // await sessionStorage.setItem("email", email);
         clearFrom();
         showToast("Login Successfully!", "success");
         navigate("/movies");
-      })
-      .catch((error) => {
-        setLoading(false);
-        if (error.response.status === 401) {
-          showToast(error.response.data.message, "error");
-        } else {
-          console.log("Error while login", error.message);
-          showToast(error.message, "error");
-        }
-      });
+      }
+    } catch (error) {
+      // call error handler
+      errorHandler(error);
+    } finally {
+      setLoading(false); // unset loader
+    }
   };
 
   function clearFrom() {
