@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ThemeContext from "../context/ThemeContext";
+import PrivateRoute from "./PrivateRoute.js";
+import PublicRoute from "./PublicRoute.js";
 import Header from "./Header";
 import Footer from "./Footer";
 import NotFound from "../screens/NotFound";
@@ -15,9 +17,9 @@ import AddMovies from "../screens/backoffice/AddMovies";
 import Callbackhook from "../screens/backoffice/Callbackhook";
 import Memohook from "../screens/backoffice/Memohook.jsx";
 import Login from "../screens/auth/Login.jsx";
+import ForgotPassword from "../screens/auth/ForgotPassword.jsx";
 import SignUp from "../screens/auth/SignUp.jsx";
-import PrivateRoute from "./PrivateRoute.js";
-import PublicRoute from "./PublicRoute.js";
+import Profile from "../screens/Profile";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -36,6 +38,14 @@ const Navigations = () => {
             }
           />
           <Route
+            path="/forgot-password"
+            element={
+              <PublicRoute>
+                <ForgotPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
             path="/signup"
             element={
               <PublicRoute>
@@ -48,6 +58,14 @@ const Navigations = () => {
             element={
               <PrivateRoute>
                 <Movies />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />

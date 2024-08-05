@@ -75,17 +75,18 @@ function Header() {
                 </button>
               </Link>
             )}
-
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasNavbarDark"
-              aria-controls="offcanvasNavbarDark"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+            <Link to="/profile">
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarDark"
+                aria-controls="offcanvasNavbarDark"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+            </Link>
           </div>
           <div
             className="offcanvas offcanvas-end text-bg-white"

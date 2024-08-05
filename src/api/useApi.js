@@ -13,6 +13,9 @@ const useApi = {
     return respose;
     // return respose.data;
   },
+  updateUserProfile: async (payload) => {
+    return await api.post(endpoint.updateProfile, payload);
+  },
 };
 
 export default useApi;
