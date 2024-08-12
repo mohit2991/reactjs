@@ -16,6 +16,9 @@ const useApi = {
   updateUserProfile: async (payload) => {
     return await api.post(endpoint.updateProfile, payload);
   },
+  forgotPassword: async (payload) => {
+    return await api.post(endpoint.forgotPassword, payload);
+  },
 };
 
 export default useApi;

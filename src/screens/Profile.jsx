@@ -21,7 +21,7 @@ const Profile = () => {
         },
       });
       if (response) {
-        setProfileData(response.data[0]);
+        setProfileData(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -67,8 +67,11 @@ const Profile = () => {
 
     reader.onloadend = () => {
       setFile({
-        data: reader.result.split(",")[1], // Base64 data
-        filename: file.name,
+        name: profileData?.name,
+        profile: {
+          data: reader.result.split(",")[1], // Base64 data
+          filename: file.name,
+        },
       });
     };
 
@@ -86,6 +89,7 @@ const Profile = () => {
       const payload = file;
       const response = await useApi.updateUserProfile(payload);
       if (response) {
+        getProfile();
         showToast("Profile image uploaded successfully", "success");
       }
     } catch (error) {
@@ -101,14 +105,18 @@ const Profile = () => {
           <div className="col-md-4">
             <div className="card">
               <div className="card-body text-center">
-                <input type="file" onChange={handleFileChange} />
-                <br />
-                <br />
                 <img
-                  src={`C:/mohit/bookmyshow/node_apis/src/uploads/15849704207951.jpg`}
+                  style={{ height: "75px" }}
+                  src={
+                    profileData?.profile
+                      ? profileData?.profile
+                      : "/images/user-profile.png"
+                  }
                   className="rounded-circle mb-3 w-25"
                   alt="Profile Picture"
                 />
+                <input type="file" onChange={handleFileChange} />
+                <br />
                 <h4>{profileData?.name}</h4>
                 <p className="text-muted">{profileData?.email}</p>
               </div>
