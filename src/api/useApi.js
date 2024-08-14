@@ -19,6 +19,9 @@ const useApi = {
   forgotPassword: async (payload) => {
     return await api.post(endpoint.forgotPassword, payload);
   },
+  validateOtp: async (payload) => {
+    return await api.post(endpoint.validateOtp, payload);
+  },
 };
 
 export default useApi;
