@@ -77,9 +77,9 @@ const InnerHeader = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Gift cards
-              </a>
+              <Link className="nav-link" to="/chat">
+                Chat
+              </Link>
             </li>
           </ul>
         </div>

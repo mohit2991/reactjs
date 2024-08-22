@@ -22,6 +22,12 @@ const useApi = {
   validateOtp: async (payload) => {
     return await api.post(endpoint.validateOtp, payload);
   },
+  sendMessage: async (payload) => {
+    return await api.post(endpoint.sendMessage, payload);
+  },
+  getMessage: async (payload) => {
+    return await api.get(endpoint.getMessage, payload);
+  },
 };
 
 export default useApi;

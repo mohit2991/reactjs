@@ -20,6 +20,7 @@ import Login from "../screens/auth/Login.jsx";
 import ForgotPassword from "../screens/auth/ForgotPassword.jsx";
 import SignUp from "../screens/auth/SignUp.jsx";
 import Profile from "../screens/Profile";
+import ChatScreen from "../screens/chat/ChatScreen.jsx";
 
 const Navigations = () => {
   const { theme } = useContext(ThemeContext);
@@ -66,6 +67,14 @@ const Navigations = () => {
             element={
               <PrivateRoute>
                 <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <PrivateRoute>
+                <ChatScreen />
               </PrivateRoute>
             }
           />
