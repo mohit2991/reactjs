@@ -22,11 +22,14 @@ const useApi = {
   validateOtp: async (payload) => {
     return await api.post(endpoint.validateOtp, payload);
   },
+  customerCareUsers: async () => {
+    return await api.get(endpoint.customerCareUsers);
+  },
   sendMessage: async (payload) => {
     return await api.post(endpoint.sendMessage, payload);
   },
-  getMessage: async (payload) => {
-    return await api.get(endpoint.getMessage, payload);
+  getMessages: async () => {
+    return await api.get(endpoint.getMessages);
   },
 };
 

@@ -5,8 +5,9 @@ const endpoint = {
   updateProfile: "/api/update-profile",
   forgotPassword: "/api/forgot-password",
   validateOtp: "/api/validate-otp",
+  customerCareUsers: "/api/customer-care-user-list",
   sendMessage: "/api/send-message",
-  getMessage: "/api/get-messages",
+  getMessages: "/api/get-messages",
 };
 
 export default endpoint;
