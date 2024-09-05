@@ -40,6 +40,7 @@ const Login = () => {
       const response = await useApi.login(payload); // Call login api
       if (response) {
         await localStorage.setItem("email", email);
+        await localStorage.setItem("userRole", response.data.role);
         await localStorage.setItem("token", response.data.token);
         await sessionStorage.setItem("email", email);
         clearFrom();

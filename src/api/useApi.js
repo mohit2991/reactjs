@@ -29,7 +29,7 @@ const useApi = {
     return await api.post(endpoint.sendMessage, payload);
   },
   getMessages: async () => {
-    return await api.get(endpoint.getMessages);
+    return await api.post(endpoint.getMessages);
   },
 };
 

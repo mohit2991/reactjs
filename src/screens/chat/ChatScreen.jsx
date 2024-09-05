@@ -1,79 +1,102 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { io } from "socket.io-client";
 import useApi from "../../api/useApi";
 import errorHandler from "../../utils/errorHandle";
 import "./index.scss";
 
 const ChatScreen = () => {
   const [customerCareUserList, setCustomerCareUserList] = useState([]);
-  const [message, setMessage] = useState("");
   const [userId, setUserId] = useState(null);
-  const [chatData, setchatData] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [message, setMessage] = useState("");
+  const [chatData, setChatData] = useState([]);
+  const [socket, setSocket] = useState(null);
+
+  // Only for admin - Start
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const customerId = searchParams.get("customerId");
+  // Only for admin - End
 
   useEffect(() => {
-    // Get customer care users list
-    customerCareUsers();
+    const newSocket = io("http://localhost:8000");
+    setSocket(newSocket);
 
-    // Call get messages function on page load to get message list
-    getMessages();
+    newSocket.on("connect", () => {
+      console.log("Connected to the server via socket.io");
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      newSocket.disconnect();
+    };
   }, []);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("receiveMessage", (messages) => {
+        console.log(">>>>>> mohit message", messages);
+
+        setChatData(messages);
+      });
+
+      // Cleanup on component unmount
+      return () => {
+        socket.off("receiveMessage");
+      };
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    customerCareUsers();
+    getMessages();
+  }, [customerId]);
 
   const customerCareUsers = async () => {
     try {
       const users = await useApi.customerCareUsers();
-
-      setCustomerCareUserList(users?.data?.userList);
+      setCustomerCareUserList(users?.data?.userList || []);
     } catch (error) {
-      // call error handler
       errorHandler(error);
     }
   };
 
   const getMessages = async () => {
     try {
-      const messages = await useApi.getMessages();
-
-      setUserId(messages?.data?.userId);
-
-      setchatData(messages?.data?.chatData);
+      const userRole = localStorage.getItem("userRole");
+      const payload = {
+        to_user_id: userRole === "support" ? customerId : null,
+      };
+      const messages = await useApi.getMessages(payload);
+      setUserId(messages?.data?.userId || null);
+      setChatData(messages?.data?.chatData || []);
     } catch (error) {
-      // call error handler
       errorHandler(error);
     }
   };
 
   const handleSendMessage = async () => {
     try {
+      const userRole = localStorage.getItem("userRole");
       const payload = {
-        to_user_id: customerCareUserList[0]?.id,
+        email: localStorage.getItem("email"),
+        to_user_id:
+          userRole === "support" ? customerId : customerCareUserList[0]?.id,
         message: message,
       };
 
+      socket.emit("sendMessage", payload);
       setMessage("");
       setIsButtonDisabled(true);
-
-      await useApi.sendMessage(payload);
     } catch (error) {
-      // call error handler
       errorHandler(error);
     }
   };
 
   useEffect(() => {
-    if (message !== "") {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
+    setIsButtonDisabled(message.trim() === "");
   }, [message]);
-
-  useEffect(() => {
-    if (chatData.length > 0) {
-      setTimeout(() => {
-        getMessages();
-      }, 1000);
-    }
-  }, [chatData]);
 
   return (
     <div className="chat-window">
@@ -81,29 +104,24 @@ const ChatScreen = () => {
         <div className="chat-participant">
           {/* <img src="avatar.jpg" alt="User Avatar" className="avatar" /> */}
           <div className="chat-info">
-            <h2 className="chat-name">Customer Support </h2>
+            <h2 className="chat-name">Customer</h2>
             <p className="chat-status">Online</p>
           </div>
         </div>
       </div>
       <div className="message-area">
-        {chatData.length === 0 ? (
-          "No Chat Available"
-        ) : (
-          <>
-            {chatData.map((chat) => {
-              return (
-                <div
-                  className={`message ${
-                    userId === chat.from_user_id ? "sent" : "received"
-                  }`}
-                >
-                  <p>{chat.message}</p>
-                </div>
-              );
-            })}
-          </>
-        )}
+        {chatData.length === 0
+          ? "No Chat Available"
+          : chatData.map((chat, index) => (
+              <div
+                key={index}
+                className={`message ${
+                  userId === chat.from_user_id ? "sent" : "received"
+                }`}
+              >
+                <p>{chat.message}</p>
+              </div>
+            ))}
       </div>
       <div className="input-area">
         <input
